@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>@torukclub - Links Importantes</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a0a0b;
+    --bg-raise: #141416;
+    --text: #f3f1ec;
+    --text-muted: #9c9ba3;
+    --accent: #772600;
+    --line: rgba(255,255,255,0.08);
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{
+    background:var(--bg); color:var(--text);
+    font-family:'Manrope', sans-serif;
+    min-height:100vh;
+  }
+  body{
+    display:flex; justify-content:center;
+    padding:56px 20px 40px;
+    position:relative;
+  }
+  /* ---------- FOTO DE FUNDO ---------- */
+  /* Troque a URL abaixo pela sua imagem, ex: url('imagens/fundo.jpg') */
+  .bg-photo{
+  position:fixed; top:0; left:0;
+  width:100%; height:100%;
+  z-index:-2;
+  object-fit:cover;
+  object-position:center;
+}
+  /* escurece a foto pra manter o texto legível — ajuste a opacidade se quiser mais ou menos escuro */
+  .bg-overlay{
+    position:fixed; inset:0; z-index:-1;
+    background:rgba(10,10,11,0.78);
+  }
+  /* fundo com leve textura/gradiente, igual clima da página do curso */
+  body::before{
+    content:'';
+    position:fixed; inset:0; z-index:-1;
+    background:
+      radial-gradient(ellipse 700px 500px at 50% -10%, rgba(224,168,60,0.14), transparent 60%),
+      radial-gradient(ellipse 600px 500px at 90% 100%, rgba(224,168,60,0.06), transparent 60%);
+  }
+
+  .page{
+    width:100%; max-width:460px;
+    display:flex; flex-direction:column; align-items:center;
+  }
+
+  /* ---------- PERFIL ---------- */
+  .avatar{
+    width:96px; height:96px; border-radius:50%;
+    background:var(--bg-raise);
+    border:2px solid var(--accent);
+    overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:16px;
+  }
+  .avatar img{ width:100%; height:100%; object-fit:cover; }
+  .avatar-fallback{
+    font-family:'Bebas Neue', sans-serif;
+    font-size:34px; color:var(--accent);
+  }
+
+  .name{
+    font-family:'Bebas Neue', sans-serif;
+    font-size:28px; letter-spacing:1px;
+    margin-bottom:4px;
+    display:flex; align-items:center; gap:6px;
+  }
+  .name .verified{ width:16px; height:16px; }
+
+  .handle{
+    font-size:13px; color:var(--accent); font-weight:700;
+    margin-bottom:10px;
+  }
+
+  .bio{
+    font-size:13.5px; color:var(--text-muted);
+    text-align:center; line-height:1.55;
+    max-width:340px;
+    margin-bottom:22px;
+  }
+
+  /* ---------- REDES SOCIAIS ---------- */
+  .socials{
+    display:flex; gap:12px;
+    margin-bottom:28px;
+  }
+  .social-btn{
+    width:38px; height:38px; border-radius:50%;
+    background:var(--bg-raise);
+    border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--text-muted);
+    text-decoration:none;
+    transition:border-color .15s ease, color .15s ease, transform .15s ease;
+  }
+  .social-btn:hover{
+    border-color:var(--accent); color:var(--accent); transform:translateY(-2px);
+  }
+  .social-btn svg{ width:17px; height:17px; }
+
+  /* ---------- LINKS ---------- */
+  .links{
+    width:100%;
+    display:flex; flex-direction:column; gap:12px;
+  }
+  .link-item{
+    display:flex; align-items:center; gap:14px;
+    width:100%;
+    padding:16px 18px;
+    background:var(--bg-raise);
+    border:1px solid var(--line);
+    border-radius:12px;
+    text-decoration:none;
+    color:var(--text);
+    transition:border-color .15s ease, transform .15s ease, background .15s ease;
+  }
+  .link-item:hover{
+    border-color:var(--accent);
+    transform:translateY(-2px);
+    background:#181819;
+  }
+  .link-icon{
+    width:36px; height:36px; border-radius:8px;
+    background:rgba(224,168,60,0.12);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .link-icon svg{ width:18px; height:18px; color:var(--accent); }
+  .link-text{ flex:1; }
+  .link-title{ font-size:14.5px; font-weight:800; margin-bottom:1px; }
+  .link-sub{ font-size:12px; color:var(--text-muted); }
+  .link-arrow{ color:var(--text-muted); flex-shrink:0; }
+  .link-arrow svg{ width:16px; height:16px; }
+
+  /* destaque opcional pra um link (ex: o mais importante) */
+  .link-item.featured{
+    border-color:var(--accent);
+    background:linear-gradient(135deg, rgba(224,168,60,0.14), rgba(224,168,60,0.03));
+  }
+  .link-item.featured .link-icon{ background:var(--accent); }
+  .link-item.featured .link-icon svg{ color:#141005; }
+
+  /* ---------- RODAPÉ ---------- */
+  .footer{
+    margin-top:36px;
+    font-size:11.5px; color:var(--text-muted);
+    text-align:center;
+  }
+
+  @media (max-width:400px){
+    body{ padding:40px 16px 30px; }
+  }
+</style>
+</head>
+<body>
+
+  <img class="bg-photo" src="background.png" alt="">
+  <div class="bg-overlay"></div>
+
+  <div class="page">
+
+    <div class="avatar">
+      <img src="perfil.png" alt="Foto de perfil">
+    </div>
+
+    <div class="name">
+      Toruk Club
+      <svg class="verified" viewBox="0 0 24 24" fill="var(--accent)"><path d="M12 2l2.4 2.1 3.1-.5 1 3 2.9 1.4-.9 3.1 1.7 2.6-2.4 2.1.4 3.1-3.1.5-1.7 2.6-2.9-1.3-2.9 1.3-1.7-2.6-3.1-.5.4-3.1-2.4-2.1 1.7-2.6-.9-3.1 2.9-1.4 1-3 3.1.5z"/><path d="M9.5 12.5l1.8 1.8 3.2-3.6" fill="none" stroke="#0a0a0b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="handle">@torukclub</div>
+    <p class="bio">A próxima grande marca de performance do Brasil está sendo construída aqui.</p>
+
+    <div class="socials">
+      <a class="social-btn" href="https://instagram.com/torukclub" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a class="social-btn" href="https://youtube.com/@torukclub" target="_blank" rel="noopener" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="6" width="19" height="12" rx="4"/><path d="M10.5 9.5l5 2.5-5 2.5z" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a class="social-btn" href="https://wa.me/5500000000000" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21l1.4-4.2A8 8 0 1 1 8 20.6L3 21z"/><path d="M8.5 9.5c0 3.5 2.5 6 6 6" stroke-linecap="round"/></svg>
+      </a>
+      <a class="social-btn" href="mailto:contato@seudominio.com" aria-label="E-mail">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 7l8 6 8-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+    <div class="links">
+
+      <a class="link-item featured" href="https://form.spotform.com.br/cmug6gzf51ah201of4413t3jm" target="_blank" rel="noopener">
+        <div class="link-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="link-text">
+          <div class="link-title">Grátis: Junte-se a Comunidade Toruk</div>
+          <div class="link-sub">Quem chega cedo, senta na janela.</div>
+        </div>
+        <div class="link-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+
+      <a class="link-item" href="https://instagram.com/torukclub" target="_blank" rel="noopener">
+        <div class="link-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg>
+        </div>
+        <div class="link-text">
+          <div class="link-title">Nosso Instagram</div>
+          <div class="link-sub">Nos siga em nossa rede social oficial</div>
+        </div>
+        <div class="link-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </a>
+
+    </div>
+
+    <div class="footer">© 2026 Toruk Club · Todos os direitos reservados</div>
+
+  </div>
+
+</body>
+</html>
